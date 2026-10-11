@@ -9,6 +9,7 @@ function App() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [searchTerm, setSearchTerm] = useState('');
+  const [attr, setAttr] = useState('all');
 
     useEffect(() => {
       async function fetchHero() {
@@ -35,12 +36,20 @@ function App() {
     const handleChange = (event) => {
       setSearchTerm(event.target.value);
     };
+    const handleOption = (event) => {
+      setAttr(event.target.value);
+    }
 
     const filterHeroes = heroes.filter((hero) => {
-      return hero.localized_name.toLowerCase().includes(searchTerm.toLowerCase());
+      // return attr === "All" || hero.localized_name.toLowerCase().includes(searchTerm.toLowerCase());
+      const nameMatch = hero.localized_name.toLowerCase().includes(searchTerm.toLowerCase());
+
+      const attributeMatch =  attr === 'all' || hero.primary_attr === attr;
+      return nameMatch && attributeMatch;
+    
     });
 
-    
+    // todo filtering with attribution
     if (loading) {
       return <h1>Loading heroes....</h1>
     };
@@ -60,7 +69,15 @@ function App() {
           onChange={handleChange}
           placeholder="Type heroes"
         />
+
+        <select name="" id="" onChange={handleOption}>
+          <option value="all">All Attribute</option>
+          <option value="agi">Agility</option>
+          <option value="str">Strength</option>
+          <option value="int">Intelligence</option>
+        </select>
       </form>
+
       {filterHeroes.length > 0 ? (
         filterHeroes.map((hero) => 
           <div key={hero.id}>
