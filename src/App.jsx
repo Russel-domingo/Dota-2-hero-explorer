@@ -82,7 +82,7 @@ function App() {
 
       {filterHeroes.length > 0 ? (
         filterHeroes.map((hero) => 
-          <HeroCard hero={hero}>
+          <HeroCard key={hero} hero={hero}>
           </HeroCard>
         )
       ) : (<p>Hero not found</p>)}
