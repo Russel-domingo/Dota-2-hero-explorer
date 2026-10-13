@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
+import HeroCard from "./components/HeroCard";
 
 
 const API_URL = "https://api.opendota.com/api/heroStats";
-const IMG_BASE_URL = "https://cdn.cloudflare.steamstatic.com";
+// const IMG_BASE_URL = "https://cdn.cloudflare.steamstatic.com";
 
 function App() {
   
@@ -81,12 +82,8 @@ function App() {
 
       {filterHeroes.length > 0 ? (
         filterHeroes.map((hero) => 
-          <div key={hero.id}>
-            <p>
-              <img src={`${IMG_BASE_URL}${hero.img}`} alt={hero.localized_name} />
-              {hero.localized_name}
-            </p>
-          </div>
+          <HeroCard hero={hero}>
+          </HeroCard>
         )
       ) : (<p>Hero not found</p>)}
     </div>
