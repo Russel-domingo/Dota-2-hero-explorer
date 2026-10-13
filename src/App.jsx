@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 
 
 const API_URL = "https://api.opendota.com/api/heroStats";
+const IMG_BASE_URL = "https://cdn.cloudflare.steamstatic.com";
 
 function App() {
   
@@ -82,6 +83,7 @@ function App() {
         filterHeroes.map((hero) => 
           <div key={hero.id}>
             <p>
+              <img src={`${IMG_BASE_URL}${hero.img}`} alt={hero.localized_name} />
               {hero.localized_name}
             </p>
           </div>
